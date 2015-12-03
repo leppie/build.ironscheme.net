@@ -1,0 +1,37 @@
+﻿@model build.ironscheme.net.Models.Model
+@{
+  ViewBag.Title = "build.ironscheme.net";
+}
+<h2>Latest build</h2>
+
+<div class="row"> 
+  <div style="width:170px">@Model.Latest.Date.ToString("s")</div>
+  <div style="width:140px">@(Model.Latest.IsGit ? "Git" : "TFS") Revision: @Model.Latest.Version</div>
+  <div style="width:200px">
+  @foreach (var kv in Model.Latest.Variations) 
+  {  
+    <a href="latest?type=@kv.Key">@kv.Key (@kv.Value.Size KB)</a>
+  }
+  </div>
+  <div style="width:100px"><a href="@Model.Latest.Checkin" target="_blank">Changes</a></div>
+</div>
+<div style="clear:both"></div>
+
+<h2>Builds</h2>
+<hr />
+@foreach (var file in Model.Builds) 
+{
+<div class="row"> 
+  <div style="width:170px">@file.Date.ToString("s")</div>
+  <div style="width:140px">@(file.IsGit ? "Git" : "TFS") Revision: @file.Version</div>
+  <div style="width:200px">
+  @foreach (var kv in file.Variations) 
+  {  
+    <a href="@kv.Value.FullName">@kv.Key (@kv.Value.Size KB)</a>
+  }
+  </div>
+  <div style="width:100px"><a href="@file.Checkin" target="_blank">Changes</a></div>
+</div>
+<div style="clear:both"></div>
+<hr />
+}

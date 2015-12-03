@@ -1,0 +1,11 @@
+body {
+  font-size: .85em;
+  font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+  color: #000000;
+  background-color: #fff;
+}
+
+.row div 
+{
+  float:left;
+}
